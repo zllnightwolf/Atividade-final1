@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 250px;
+        }
+
+
+        @keyframes anim-stars {
+            from {
+                transform: translateY(0px);
+            }
+
+            to {
+                transform: translateY(-150px);
+            }
+        }
+
+        p {
+            color: white;
+            font-family: Arial;
+        }
+
+        h1 {
+            color: white;
+            font-family: Arial;
+        }
+
+        h2 {
+            color: white;
+            font-family: Arial;
+        }
+
+        body {
+            background-color: rgb(15, 15, 15);
+        }
+
+
+        .btn-gradient {
+            width: auto;
+            font-size: 1em;
+            font-family: Arial;
+            padding: 12px 25px;
+            border: none;
+            outline: none;
+            background: #ffffff;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            position: relative;
+            z-index: 0;
+            border-radius: 50px;
+        }
+
+        .btn-gradient::before {
+
+            position: absolute;
+            content: "";
+            width: calc(100% + 8px);
+            height: calc(100% + 8px);
+            left: -2px;
+            top: -2px;
+            background: linear-gradient(124deg, #e72100, #f36161, #eec647, #dfe404, #35e854, #32dfe9, #4a3df1, #e549f5, #ae07bf);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(3px);
+            animation: move 20s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 50px;
+        }
+
+        .btn-gradient:hover::before {
+            opacity: 1;
+        }
+
+        .btn-gradient::after {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #242424;
+            left: 0;
+            top: 0;
+            border-radius: 50px;
+        }
+
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+
+            50% {
+                background-position: 400% 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+
+        <h1> Preços</h1>
+        <p>Preço da coca-cola: R$4,00 </p>
+        <p>Preço do guaraná: R$5,00 </p>
+        <h2>____________________________________________________</h2>
+
+        <p><span id="texto"></span></p>
+
+        <br>
+        <a onclick="refri()" class="btn-gradient">Quero um refrigerante</a>
+        <a onclick="r()" class="btn-gradient">Selecionar quantidade</a>
+        <a onclick="notafiscal()" class="btn-gradient">Imprimir Nota Fiscal</a>
+
+
+        <h2>____________________________________________________</h2>
+        <h1> Nota FISCAL</h1>
+        <p><span id="nota"></span></p>
+        <br>
+        <h2>____________________________________________________</h2></br>
+        <h1>Preço total: R$ <span id="total"></span></h1>
+
+
+        </div>
+
+    </center>
+    <script>
+        let opcao = "";
+        let texto = ""
+        let preco = 0
+        let total = 0
+        let count = 1
+        let contador = 0
+        let nota = ""
+        let caralho = false
+
+
+
+        function refri() {
+            let bebida = (prompt("Digite qual a bebida: \n1 - Guarana \n2 - Coca-Cola"))
+            const bebidas = ["Guarana", "Coca-Cola"]
+            switch (bebida) {
+                case "1":
+                    opcao = bebidas[0];
+                    preco = 5
+                    texto = "Preço final: " + (preco) + "</br>" + "Quantidade de produtos:" + 1
+                    document.getElementById("texto").innerHTML = texto;
+                    break;
+                case "2":
+                    opcao = bebidas[1];
+                    preco = 4
+                    texto = "Preço final: " + (preco) + "</br>" + "Quantidade de produtos:" + 1
+                    document.getElementById("texto").innerHTML = texto;
+                    break;
+                default:
+                    opcao = "Escolha errada"
+                    break;
+            }
+
+        }
+        function r() {
+            contador = (prompt("Digite o número de vezes que você quer comprar o produto"));
+            count = 1
+            while (count <= contador) {
+                count++
+
+                total += preco
+                texto = "Preço final: " + total + "</br>" + "Quantidade de produtos:" + contador;
+                document.getElementById("texto").innerHTML = texto;
+
+
+            }
+
+
+            document.getElementById("opcao").innerHTML = opcao;
+
+        }
+        function notafiscal() {
+            caralho = true
+            if (caralho == true) {
+                nota += "Produto: " + opcao + "</br>" + "Quantidade: " + contador + "</br>" + "</br>"
+                document.getElementById("nota").innerHTML = nota;
+                document.getElementById("total").innerHTML = total;
+            }
+            caralho = false
+            opcao = "";
+
+        }
+        texto = ""
+        preco = 0
+        total = 0
+        count = 1
+        contador = 0
+        bebida = ""
+
+    </script>
+</body>
+
+</html>
